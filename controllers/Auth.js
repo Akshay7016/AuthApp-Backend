@@ -91,8 +91,8 @@ exports.login = async (req, res) => {
             user.password = undefined;
 
             const options = {
-                // cookie expires in 30 seconds
-                expires: new Date(Date.now() + 30000),
+                // cookie expires in 3 days
+                expires: new Date(Date.now() + 12 * 60 * 60 * 1000),
                 // prevents client-side scripts from accessing data
                 httpOnly: true
             }
