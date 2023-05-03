@@ -6,9 +6,12 @@ exports.auth = (req, res, next) => {
     try {
         // fetch JWT token, we can fetch JWT Token from
         // 1. req.body      2. Cookies       3. Header
-        const { token } = req.body;
+        const token = req.body.token || req.cookies.token || req.header("Authorization").replace("Bearer ", "");
 
-        if (!token) {
+        console.log("Token from cookie: ", req.cookies.token);
+        console.log("Token from body: ", req.body.token);
+
+        if (!token || token === undefined) {
             return res.status(401).json({
                 success: false,
                 message: "Token missing!"
