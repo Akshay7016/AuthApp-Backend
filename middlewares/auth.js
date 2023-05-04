@@ -22,7 +22,7 @@ exports.auth = (req, res, next) => {
         try {
             const userData = jwt.verify(token, process.env.JWT_SECRET);
 
-            // We are adding payload in req.user, not in req.body
+            // We are adding userData in req.user, not in req.body
             req.user = userData;
         } catch (error) {
             return res.status(401).json({
@@ -48,7 +48,7 @@ exports.isStudent = (req, res, next) => {
         if (role !== "Student") {
             return res.status(401).json({
                 success: false,
-                message: "This is protected route for Students! You are Admin!!!"
+                message: "This is protected route for Students!"
             })
         }
 
@@ -69,7 +69,7 @@ exports.isAdmin = (req, res, next) => {
         if (role !== "Admin") {
             return res.status(401).json({
                 success: false,
-                message: "This is protected route for Admin! You are Student"
+                message: "This is protected route for Admin!"
             })
         }
 
